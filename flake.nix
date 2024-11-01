@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of m";
+  description = "Home Manager configuration of serverhorror";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
