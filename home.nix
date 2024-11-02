@@ -87,6 +87,7 @@
     home-manager.enable = true;
     git = {
       enable = true;
+      package = pkgs.gitFull;
       userName = "serverhorror";
       userEmail = "serverhorror@users.noreply.github.com";
       extraConfig = {
