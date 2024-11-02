@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # dotfiles = {
+    #   url = "github:serverhorror/dotfiles";
+    #   flake = false;
+    # };
   };
 
 
@@ -16,29 +21,37 @@
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    lib = nixpkgs.lib;
     nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
 
     # from the nixpkgs docs: https://nixos.org/manual/nixpkgs/unstable/
-    buildInputs =  [
+    buildInputs =  with pkgs; [
       # # home-manager
-      # pkgs.home-manager
+      # home-manager
       # common
-      pkgs.neovim pkgs.jq pkgs.yq pkgs.ripgrep pkgs.fzf
-      pkgs.curl pkgs.dig
+      neovim
+      # gitFull
+      coreutils
+      rsync openrsync
+      tmux
+      ripgrep fzf
+      jq yq
+      curl httpie
+      dig
       # Python
-      pkgs.python3Full
-      # pkgs.python313Full
+      python3Full
+      # python313Full
       # NodeJS
-      # pkgs.nodejs_18
-      # pkgs.nodejs_20
-      pkgs.nodejs_22
+      # nodejs_18
+      # nodejs_20
+      nodejs_22
       # Go
-      pkgs.go
+      go gopls
       # Zig
-      pkgs.zig
+      zig zls
       ];
     in {
-      homeConfigurations."serverhorror" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.m= home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,

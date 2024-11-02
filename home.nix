@@ -1,10 +1,10 @@
-{ config, pkgs, ... } @ inputs:
+{ config, pkgs, buildInputs, ... } @ inputs:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "serverhorror";
-  home.homeDirectory = "/home/serverhorror";
+  home.username = "m";
+  home.homeDirectory = "/home/m";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -17,7 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = inputs.buildInputs;
+  home.packages = buildInputs;
   # home.packages = [
   #     # # Adds the 'hello' command to your environment. It prints a friendly
   #     # # "Hello, world!" when run.
@@ -40,6 +40,14 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/nvim" = {
+      source = builtins.fetchGit {
+        url = "https://github.com/serverhorror/dotfiles-vim.git";
+        ref = "main";
+        rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
+        # sha256 = "...";
+      };
+    };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -75,5 +83,24 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    git = {
+      enable = true;
+      userName = "serverhorror";
+      userEmail = "serverhorror@users.noreply.github.com";
+      extraConfig = {
+        # # This is an example of how to configure git to use a credential helper.
+        # # This is useful for example when you want to use a password manager to
+        # # store your git credentials.
+        core = {
+          whitespace = "trailing-space,space-before-tab";
+        };
+        credential = {
+          helper = "cache";
+          useHttpPath = true;
+        };
+      };
+    };
+  };
 }
