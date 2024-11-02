@@ -6,6 +6,10 @@
   home.username = "m";
   home.homeDirectory = "/home/m";
 
+  xdg = {
+    enable = true;
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -36,6 +40,13 @@
   #     #   echo "Hello, ${config.home.username}!"
   #     # '')
   #   ];
+
+  # # how?
+  # home.activation = {
+  #   init = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #     mkdir -p ~/bin
+  #   '';
+  # };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -78,6 +89,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    # GOBIN  = "~/bin";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
@@ -85,6 +97,73 @@
   # Let Home Manager install and manage itself.
   programs = {
     home-manager.enable = true;
+
+    tmux = {
+      enable = true;
+      clock24 = true;
+    };
+
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    bash = {
+      enable = true;
+      historyControl= ["erasedups" "ignoredups" "ignorespace" "ignoreboth"];
+      historyIgnore = [
+      "cd .." "cd" "exit" "ll" "ls -l" "ls"
+      "history"
+      ];
+      ## near the start
+      initExtra = ''
+      echo "#INIT [ -e zsh ] && exec zsh"
+      echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
+      '';
+
+      ## near the end
+      bashrcExtra = ''
+      echo "#EXTRA [ -e zsh ] && exec zsh"
+      '';
+    };
+
+    zsh = {
+      enable = true;
+      dotDir = ".config/zsh";
+
+      oh-my-zsh = {
+        enable = true;
+      };
+
+    };
+
+    go = {
+      enable = true;
+      goBin = "bin";
+      goPrivate = [
+        "*.biscrum.com"
+      ];
+    };
+
+    awscli = {
+      enable = true;
+      # # overwrites ~/.aws/config
+      # settings = {
+      #   "default" = {
+      #     region = "eu-west-1";
+      #     output = "json";
+      #   };
+      # };
+    };
+
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+
     git = {
       enable = true;
       package = pkgs.gitFull;
