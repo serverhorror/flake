@@ -1,6 +1,6 @@
 # nix
 
-* https://nixos.org/manual/nixpkgs/unstable/
+* <https://nixos.org/manual/nixpkgs/unstable/>
 
 ## Configuration
 
@@ -9,9 +9,9 @@ Enable the `nix` command and `flakes` (e.g. `nix flake show`)
 * `~/.config/nix/nix.conf`
 * `/etc/nix/nix.conf`
 
-```text
-experimental-features = nix-command flakes
-```
+    ```text
+    experimental-features = nix-command flakes
+    ```
 
 ## Installation
 
