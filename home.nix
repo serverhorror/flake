@@ -6,8 +6,8 @@ let
 in {
   # Home Manager needs a bit of information
   # about you and the paths it should manage.
-  home.username = "m";
-  home.homeDirectory = "/home/m";
+  home.username = "${inputs.systemUserName}";
+  home.homeDirectory = "/home/${inputs.systemUserName}";
 
   xdg = { enable = true; };
 
@@ -96,7 +96,7 @@ in {
   #
   # or
   #
-  #  /etc/profiles/per-user/m/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
@@ -136,7 +136,7 @@ in {
       historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
       ## near the start
       initExtra = ''
-        if [ -e /home/m/.nix-profile/etc/profile.d/nix.sh ]; then . /home/m/.nix-profile/etc/profile.d/nix.sh; fi                         # added by Nix installer
+        if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                         # added by Nix installer
         echo "#INIT [ -e zsh ] && exec zsh"
         echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
       '';
