@@ -27,10 +27,11 @@ Enable the `nix` command and `flakes` (e.g. `nix flake show`)
 ## Bootstrap Nix
 
     ```text
-    sh <(curl -L https://nixos.org/nix/install) --daemon
     sudo dnf install --assumeyes --quiet git
+    sh <(curl -L https://nixos.org/nix/install) --daemon
     mkdir --parent ~/.config/nix
     echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+    exec bash
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --update
     nix-shell '<home-manager>' -A install
