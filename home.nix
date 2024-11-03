@@ -63,6 +63,13 @@ in {
     ".config/nix/nix.conf" = {
       text = "experimental-features = nix-command flakes";
     };
+    ".config/git/boehringer-ingelheim.inc" = {
+      text = ''
+      [user]
+        name = "Martin Marcher";
+        email = "martin.marcher@boehringer-ingelheim.com";
+      '';
+    };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -184,14 +191,28 @@ in {
       package = pkgs.gitFull;
       userName = "serverhorror";
       userEmail = "serverhorror@users.noreply.github.com";
+      includes = [
+        {
+          path = ".config/git/boehringer-ingelheim.inc";
+          condition = "hasconfig:remote.*.url:https://bitbucket.biscru.com/**";
+        }
+      ];
       extraConfig = {
         # # This is an example of how to configure git to use a credential helper.
         # # This is useful for example when you want to use a password manager to
         # # store your git credentials.
         core = { whitespace = "trailing-space,space-before-tab"; };
+        rerere = { enabled = true; };
+        "credential \"https://bitbucket.biscrum.com\"" = {
+          bitbucketAuthModes = "oauth";
+          provider = "bitbucket";
+        };
+        "credential \"https://huggingface.co\"" = {
+          provider = "generic";
+        };
         credential = {
           helper = "cache";
-          useHttpPath = true;
+          useHttpPath = "true";
         };
       };
     };
