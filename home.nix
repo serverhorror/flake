@@ -52,14 +52,14 @@ in {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/nvim" = {
-      source = builtins.fetchGit {
-        url = "https://github.com/serverhorror/dotfiles-vim.git";
-        ref = "main";
-        rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
-        # sha256 = "...";
-      };
-    };
+    # ".config/nvim" = {
+    #   source = builtins.fetchGit {
+    #     url = "https://github.com/serverhorror/dotfiles-vim.git";
+    #     ref = "main";
+    #     rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
+    #     # sha256 = "...";
+    #   };
+    # };
     ".config/nix/nix.conf" = {
       text = "experimental-features = nix-command flakes";
     };
@@ -102,20 +102,20 @@ in {
   programs = {
     home-manager.enable = true;
 
-    # tmux = {
-    #   enable = true;
-    #   clock24 = true;
-    #   shortcut = "space";
-    #   sensibleOnTop = true;
-    #   plugins = with pkgs; [
-    #       tmuxPlugins.vim-tmux-navigator
-    #   ];
-    #   # extraConfig = ''
-    #   #   # Easier and faster switching between next/prev window
-    #   #   bind C-p previous-window
-    #   #   bind C-n next-window
-    #   # '';
-    # };
+    tmux = {
+      enable = true;
+      clock24 = true;
+      shortcut = "space";
+      sensibleOnTop = true;
+      plugins = with pkgs; [
+          tmuxPlugins.vim-tmux-navigator
+      ];
+      # extraConfig = ''
+      #   # Easier and faster switching between next/prev window
+      #   bind C-p previous-window
+      #   bind C-n next-window
+      # '';
+    };
 
     direnv = {
       enable = true;
@@ -163,6 +163,10 @@ in {
       #     output = "json";
       #   };
       # };
+    };
+
+    gh = {
+      enable = true;
     };
 
     neovim = {

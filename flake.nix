@@ -29,20 +29,19 @@
         # # common
         # neovim # handled by home-manager
         # gitFull # handled by home-manager
-        coreutils
-        rsync
-        openrsync
+        coreutils gnumake
+        gcc
+        rsync openrsync
+        tree
         # tmux # handled by home-manager
-        ripgrep
-        fzf
-        fd
-        jq
-        yq
-        curl
-        httpie
+        curl httpie
         dig
+        fd fzf jq yq ripgrep
+        unzip
+        # lua51Packages.luarocks
+        lua51Packages.luarocks-nix
         # Python
-        python3Full
+        python3Full poetry
         # python313Full
         # NodeJS
         # nodejs_18
