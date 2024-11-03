@@ -9,25 +9,59 @@ Enable the `nix` command and `flakes` (e.g. `nix flake show`)
 * `~/.config/nix/nix.conf`
 * `/etc/nix/nix.conf`
 
-    ```text
-    experimental-features = nix-command flakes
+    ```bash
+    echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
     ```
 
-## Installation
+> ### If on WSL
+>
+> put the following in `/etc/wsl.conf`
+>
+> ```text
+> [boot]
+> systemd = true
+>
+> # ...(more lines here)...
+> ```
+
+## Bootstrap Nix
+
+    ```text
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+    sudo dnf install --assumeyes --quiet git
+    mkdir --parent ~/.config/nix
+    echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-channel --update
+    nix-shell '<home-manager>' -A install
+    source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+    home-manager --version
+    home-manager switch -b "bak$((RANDOM))" --flake .
+    ```
+
+## Other Info
 
 * Create a new flake
 
     ```bash
     nix --extra-experimental-features 'nix-command flakes' flake init
     ```
+* "Develop"
+  Enters a new shell based on `devShells.x86_64-linux.default`
+
+    ```bash
+    nix  --extra-experimental-features 'nix-command flakes' develop
+    ```
+
 
 * Do it!
+  This requires a program/package to be runable
 
     ```bash
     nix  --extra-experimental-features 'nix-command flakes' run
     ```
 
-## Random commands
+### Random commands
 
 ```bash
 nix --extra-experimental-features 'nix-command flakes' flake check

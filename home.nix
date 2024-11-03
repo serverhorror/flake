@@ -1,14 +1,15 @@
-{ config, pkgs, buildInputs, ... } @ inputs:
+{ config, pkgs, buildInputs, ... }@inputs:
+let
+  f = "a";
+  lib = config.lib;
 
-{
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
+in {
+  # Home Manager needs a bit of information
+  # about you and the paths it should manage.
   home.username = "m";
   home.homeDirectory = "/home/m";
 
-  xdg = {
-    enable = true;
-  };
+  xdg = { enable = true; };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -59,6 +60,9 @@
         # sha256 = "...";
       };
     };
+    ".config/nix/nix.conf" = {
+      text = "experimental-features = nix-command flakes";
+    };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -98,10 +102,20 @@
   programs = {
     home-manager.enable = true;
 
-    tmux = {
-      enable = true;
-      clock24 = true;
-    };
+    # tmux = {
+    #   enable = true;
+    #   clock24 = true;
+    #   shortcut = "space";
+    #   sensibleOnTop = true;
+    #   plugins = with pkgs; [
+    #       tmuxPlugins.vim-tmux-navigator
+    #   ];
+    #   # extraConfig = ''
+    #   #   # Easier and faster switching between next/prev window
+    #   #   bind C-p previous-window
+    #   #   bind C-n next-window
+    #   # '';
+    # };
 
     direnv = {
       enable = true;
@@ -111,20 +125,18 @@
 
     bash = {
       enable = true;
-      historyControl= ["erasedups" "ignoredups" "ignorespace" "ignoreboth"];
-      historyIgnore = [
-      "cd .." "cd" "exit" "ll" "ls -l" "ls"
-      "history"
-      ];
+      historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
+      historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
       ## near the start
       initExtra = ''
-      echo "#INIT [ -e zsh ] && exec zsh"
-      echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
+        if [ -e /home/m/.nix-profile/etc/profile.d/nix.sh ]; then . /home/m/.nix-profile/etc/profile.d/nix.sh; fi                         # added by Nix installer
+        echo "#INIT [ -e zsh ] && exec zsh"
+        echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
       '';
 
       ## near the end
       bashrcExtra = ''
-      echo "#EXTRA [ -e zsh ] && exec zsh"
+        echo "#EXTRA [ -e zsh ] && exec zsh"
       '';
     };
 
@@ -132,18 +144,14 @@
       enable = true;
       dotDir = ".config/zsh";
 
-      oh-my-zsh = {
-        enable = true;
-      };
+      oh-my-zsh = { enable = true; };
 
     };
 
     go = {
       enable = true;
       goBin = "bin";
-      goPrivate = [
-        "*.biscrum.com"
-      ];
+      goPrivate = [ "*.biscrum.com" ];
     };
 
     awscli = {
@@ -162,6 +170,9 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      # plugins = with pkgs; [
+      #   vimPlugins.vim-tmux-navigator
+      # ];
     };
 
     git = {
@@ -173,9 +184,7 @@
         # # This is an example of how to configure git to use a credential helper.
         # # This is useful for example when you want to use a password manager to
         # # store your git credentials.
-        core = {
-          whitespace = "trailing-space,space-before-tab";
-        };
+        core = { whitespace = "trailing-space,space-before-tab"; };
         credential = {
           helper = "cache";
           useHttpPath = true;

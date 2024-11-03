@@ -15,54 +15,60 @@
     # };
   };
 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      lib = nixpkgs.lib;
+      nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
 
-
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-  let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    lib = nixpkgs.lib;
-    nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
-
-    # from the nixpkgs docs: https://nixos.org/manual/nixpkgs/unstable/
-    buildInputs =  with pkgs; [
-      # # home-manager
-      # home-manager
-      # # common
-      # neovim # handled by home-manager
-      # gitFull # handled by home-manager
-      coreutils
-      rsync openrsync
-      # tmux # handled by home-manager
-      ripgrep fzf
-      jq yq
-      curl httpie
-      dig
-      # Python
-      python3Full
-      # python313Full
-      # NodeJS
-      # nodejs_18
-      # nodejs_20
-      nodejs_22
-      # Go
-      # go gopls # handled by home-manager
-      # Zig
-      zig zls
+      # from the nixpkgs docs: https://nixos.org/manual/nixpkgs/unstable/
+      buildInputs = with pkgs; [
+        # # home-manager
+        # home-manager
+        # # common
+        # neovim # handled by home-manager
+        # gitFull # handled by home-manager
+        coreutils
+        rsync
+        openrsync
+        # tmux # handled by home-manager
+        ripgrep
+        fzf
+        fd
+        jq
+        yq
+        curl
+        httpie
+        dig
+        # Python
+        python3Full
+        # python313Full
+        # NodeJS
+        # nodejs_18
+        # nodejs_20
+        nodejs_22
+        # Go
+        # go gopls # handled by home-manager
+        # Zig
+        zig
+        zls
+        # nix stuff
+        nixfmt-rfc-style
       ];
     in {
 
-      environment = {
-        # https://mynixos.com/nixpkgs/option/environment.systemPackages
-        # The set of packages that appear in /run/current-system/sw. These
-        # packages are automatically available to all users, and are
-        # automatically updated every time you rebuild the system configuration.
-        # (The latter is the main difference with installing them in the
-        # default # profile, /nix/var/nix/profiles/default.)
-        systemPackages = buildInputs;
-      };
+      #environment = {
+      #  # https://mynixos.com/nixpkgs/option/environment.systemPackages
+      #  # The set of packages that appear in /run/current-system/sw. These
+      #  # packages are automatically available to all users, and are
+      #  # automatically updated every time you rebuild the system configuration.
+      #  # (The latter is the main difference with installing them in the
+      #  # default # profile, /nix/var/nix/profiles/default.)
+      #  systemPackages = buildInputs;
+      #};
 
-      homeConfigurations.m= home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.m = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
@@ -71,22 +77,17 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = {
-          inherit buildInputs;
-        };
+        extraSpecialArgs = { inherit buildInputs; };
       };
 
-      # packages.x86_64-linux.hello = pkgs.hello;
-      #
-      # # Used by: `nix [run\build]`
-      packages.x86_64-linux.default = pkgs.mkShell{
-        buildInputs = buildInputs;
-      };
+      # # # Used by: `nix [run\build]`
+      # packages.${system}.default = pkgs.mkShell{
+      #   buildInputs = buildInputs;
+      # };
 
       # Used by: `nix develop`
-      devShells.x86_64-linux.default = pkgs.mkShell{
-        buildInputs = buildInputs;
-      };
+      devShells.${system}.default = pkgs.mkShell { buildInputs = buildInputs; };
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
 
     };
 }
