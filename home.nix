@@ -103,6 +103,7 @@ in {
     # GOBIN  = "~/bin";
     EDITOR = "nvim";
     VISUAL = "nvim";
+    PATH = "$HOME/bin:$PATH";
   };
 
   # Let Home Manager install and manage itself.
