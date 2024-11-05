@@ -36,8 +36,8 @@
         # tmux # handled by home-manager
         curl httpie
         dig
-        fd fzf jq yq ripgrep
-        unzip
+        fd fzf jq yq ripgrep pup
+        unzip libxml2
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
