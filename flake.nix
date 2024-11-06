@@ -38,6 +38,8 @@
         dig
         fd fzf jq yq ripgrep pup
         unzip libxml2
+        # K8S
+        cri-tools
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
