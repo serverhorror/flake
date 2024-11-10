@@ -148,13 +148,13 @@ in {
       ## near the start
       initExtra = ''
         if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                         # added by Nix installer
-        echo "#INIT [ -e zsh ] && exec zsh"
-        echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
+        # echo "#INIT [ -e zsh ] && exec zsh"
+        # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
       '';
 
       ## near the end
       bashrcExtra = ''
-        echo "#EXTRA [ -e zsh ] && exec zsh"
+        # echo "#EXTRA [ -e zsh ] && exec zsh"
       '';
     };
 
