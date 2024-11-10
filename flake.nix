@@ -38,9 +38,10 @@
         dig
         fd fzf jq yq ripgrep pup
         unzip libxml2
-        # containers, K8S
+        # IaC, containers, K8S
         docker-client docker-buildx
         cri-tools cue kind
+        pulumi
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
