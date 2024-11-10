@@ -60,6 +60,16 @@ in {
     #     # sha256 = "...";
     #   };
     # };
+    ".inputrc" = {
+      text = ''
+        $include /etc/inputrc
+        set bell-style none
+        set show-all-if-ambiguous on
+        set show-all-if-unmodified on
+        # so bash cycles thru completions
+        TAB: menu-complete
+      '';
+    };
     ".config/nix/nix.conf" = {
       text = "experimental-features = nix-command flakes";
     };
