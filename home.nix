@@ -66,6 +66,9 @@ in {
         set bell-style none
         set show-all-if-ambiguous on
         set show-all-if-unmodified on
+        set completion-ignore-case on
+        set expand-tilde on
+        set menu-complete-display-prefix on
         # so bash cycles thru completions
         TAB: menu-complete
       '';
@@ -75,9 +78,9 @@ in {
     };
     ".config/git/boehringer-ingelheim.inc" = {
       text = ''
-      [user]
-        name = "Martin Marcher";
-        email = "martin.marcher@boehringer-ingelheim.com";
+        [user]
+          name = "Martin Marcher";
+          email = "martin.marcher@boehringer-ingelheim.com";
       '';
     };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
@@ -111,8 +114,10 @@ in {
   home.sessionVariables = {
     # EDITOR = "emacs";
     # GOBIN  = "~/bin";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+
+    # if we have the command 'code' then code otherwise vim
+    EDITOR = "command -v code >/dev/null 2>&1 && code --wait - || vim";
+    VISUAL = "command -v code >/dev/null 2>&1 && code --wait - || vim";
     PATH = "$HOME/bin:$PATH";
   };
 
@@ -125,9 +130,7 @@ in {
       clock24 = true;
       shortcut = "space";
       sensibleOnTop = true;
-      plugins = with pkgs; [
-          tmuxPlugins.vim-tmux-navigator
-      ];
+      plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
       # extraConfig = ''
       #   # Easier and faster switching between next/prev window
       #   bind C-p previous-window
@@ -147,7 +150,9 @@ in {
       historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
       ## near the start
       initExtra = ''
-        if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                         # added by Nix installer
+        if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                                  # added by Nix installer
+        if [ -r /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh ]; then . /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh; fi  # added by Nix installer
+        if [ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then echo "sourcing session vars"; . ~/.nix-profile/etc/profile.d/hm-session-vars.sh; fi                                                                    # added by Nix installer
         # echo "#INIT [ -e zsh ] && exec zsh"
         # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
       '';
@@ -156,6 +161,11 @@ in {
       bashrcExtra = ''
         # echo "#EXTRA [ -e zsh ] && exec zsh"
       '';
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
     };
 
     zsh = {
@@ -183,9 +193,7 @@ in {
       # };
     };
 
-    gh = {
-      enable = true;
-    };
+    gh = { enable = true; };
 
     neovim = {
       enable = true;
@@ -202,12 +210,6 @@ in {
       package = pkgs.gitFull;
       userName = "serverhorror";
       userEmail = "serverhorror@users.noreply.github.com";
-      includes = [
-        {
-          path = ".config/git/boehringer-ingelheim.inc";
-          condition = "hasconfig:remote.*.url:https://bitbucket.biscru.com/**";
-        }
-      ];
       extraConfig = {
         # # This is an example of how to configure git to use a credential helper.
         # # This is useful for example when you want to use a password manager to
@@ -217,15 +219,20 @@ in {
         "credential \"https://bitbucket.biscrum.com\"" = {
           bitbucketAuthModes = "oauth";
           provider = "bitbucket";
+          helper = "/home/m/.nix-profile/bin/git-credential-manager";
+          useHttpPath = "true";
         };
-        "credential \"https://huggingface.co\"" = {
-          provider = "generic";
-        };
+        "credential \"https://huggingface.co\"" = { provider = "generic"; };
+        "credential \"https://dev.azure.com\"" = { useHttpPath = "true"; };
         credential = {
-          helper = "cache";
+          helper = "/home/m/.nix-profile/bin/git-credential-manager";
           useHttpPath = "true";
         };
       };
+      includes = [{
+        path = ".config/git/boehringer-ingelheim.inc";
+        condition = "hasconfig:remote.*.url:https://bitbucket.biscru.com/**";
+      }];
     };
   };
 }
