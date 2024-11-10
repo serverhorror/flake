@@ -41,7 +41,7 @@
         # IaC, containers, K8S
         docker-client docker-buildx
         cri-tools cue kind
-        pulumi
+        pulumi-bin
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
