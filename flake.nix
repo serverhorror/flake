@@ -40,7 +40,7 @@
         unzip libxml2
         # containers, K8S
         docker-client docker-buildx
-        cri-tools cue
+        cri-tools cue kind
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
