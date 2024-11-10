@@ -2,5 +2,25 @@
     "nix.enableLanguageServer": false,
     "[nix]": {
         "editor.formatOnSave": false
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#a7cdeb",
+        "activityBar.background": "#a7cdeb",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#d64998",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#a7cdeb",
+        "statusBar.background": "#7eb5e1",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#559dd7",
+        "statusBarItem.remoteBackground": "#7eb5e1",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#7eb5e1",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#7eb5e199",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.remoteColor": "#7eb5e1"
 }
