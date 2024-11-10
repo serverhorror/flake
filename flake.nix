@@ -29,23 +29,37 @@
         # # common
         # neovim # handled by home-manager
         # gitFull # handled by home-manager
-        coreutils gnumake
+        coreutils
+        gnumake
         gcc
-        rsync openrsync
+        rsync
+        openrsync
         tree
+        git-credential-manager
+        libsecret
         # tmux # handled by home-manager
-        curl httpie
+        curl
+        httpie
         dig
-        fd fzf jq yq ripgrep pup
-        unzip libxml2
+        fd
+        jq
+        yq
+        ripgrep
+        pup
+        unzip
+        libxml2
         # IaC, containers, K8S
-        docker-client docker-buildx
-        cri-tools cue kind
+        docker-client
+        docker-buildx
+        cri-tools
+        cue
+        kind
         pulumi-bin
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
         # Python
-        python3Full poetry
+        python3Full
+        poetry
         # python313Full
         # NodeJS
         # nodejs_18
