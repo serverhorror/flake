@@ -231,7 +231,7 @@ in {
       };
       includes = [{
         path = ".config/git/boehringer-ingelheim.inc";
-        condition = "hasconfig:remote.*.url:https://bitbucket.biscru.com/**";
+        condition = "hasconfig:remote.*.url:https://bitbucket.biscrum.com/**";
       }];
     };
   };
