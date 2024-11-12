@@ -1,4 +1,3 @@
-flake.lock
 result
 *.ignore
 .envrc
