@@ -60,6 +60,12 @@ in {
     #     # sha256 = "...";
     #   };
     # };
+    ".digrc" = {
+      text = ''
+        +noall
+        +answer
+      '';
+    };
     ".inputrc" = {
       text = ''
         $include /etc/inputrc
@@ -67,7 +73,7 @@ in {
         set show-all-if-ambiguous on
         set show-all-if-unmodified on
         set completion-ignore-case on
-        set expand-tilde on
+        set expand-tilde off
         set menu-complete-display-prefix on
         # so bash cycles thru completions
         TAB: menu-complete
@@ -131,11 +137,11 @@ in {
       shortcut = "space";
       sensibleOnTop = true;
       plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
-      # extraConfig = ''
-      #   # Easier and faster switching between next/prev window
-      #   bind C-p previous-window
-      #   bind C-n next-window
-      # '';
+      extraConfig = ''
+        # Easier and faster switching between next/prev window
+        bind C-n next-window
+        bind C-p previous-window
+      '';
     };
 
     direnv = {
