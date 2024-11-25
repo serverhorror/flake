@@ -38,6 +38,7 @@
         openrsync
         tree
         git-credential-manager
+        git-credential-oauth
         libsecret
         # tmux # handled by home-manager
         curl

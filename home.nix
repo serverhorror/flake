@@ -225,13 +225,20 @@ in {
         "credential \"https://bitbucket.biscrum.com\"" = {
           bitbucketAuthModes = "oauth";
           provider = "bitbucket";
-          helper = "/home/m/.nix-profile/bin/git-credential-manager";
+          helper = [
+            "cache --timeout 21600"
+            "oauth"
+          ];
           useHttpPath = "true";
         };
         "credential \"https://huggingface.co\"" = { provider = "generic"; };
         "credential \"https://dev.azure.com\"" = { useHttpPath = "true"; };
         credential = {
-          helper = "/home/m/.nix-profile/bin/git-credential-manager";
+          credentialStore = "cache";
+          helper = [
+            "cache --timeout 21600"
+            "/home/${inputs.systemUserName}/.nix-profile/bin/git-credential-manager"
+          ];
           useHttpPath = "true";
         };
       };
