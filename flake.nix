@@ -31,6 +31,8 @@
         # gitFull # handled by home-manager
         coreutils
         gnumake
+        stow
+        xclip  # so we have a working vim clipboard
         gcc
         rsync
         openrsync
