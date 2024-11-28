@@ -57,6 +57,7 @@
         cri-tools
         cue
         kind
+        openshift
         pulumi-bin
         # lua51Packages.luarocks
         lua51Packages.luarocks-nix
