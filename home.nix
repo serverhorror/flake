@@ -169,6 +169,8 @@ in {
     #   '';
     # };
 
+    lazygit = { enable = true; };
+
     fzf = {
       enable = true;
       enableBashIntegration = true;
