@@ -64,6 +64,7 @@
         # Python
         python3Full
         poetry
+        uv
         # python313Full
         # NodeJS
         # nodejs_18
