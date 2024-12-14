@@ -66,29 +66,29 @@ in {
         +answer
       '';
     };
-    ".inputrc" = {
-      text = ''
-        $include /etc/inputrc
-        set bell-style none
-        set show-all-if-ambiguous on
-        set show-all-if-unmodified on
-        set completion-ignore-case on
-        set expand-tilde off
-        set menu-complete-display-prefix on
-        # so bash cycles thru completions
-        TAB: menu-complete
-      '';
-    };
-    ".config/nix/nix.conf" = {
-      text = "experimental-features = nix-command flakes";
-    };
-    ".config/git/boehringer-ingelheim.inc" = {
-      text = ''
-        [user]
-          name = "Martin Marcher";
-          email = "martin.marcher@boehringer-ingelheim.com";
-      '';
-    };
+    # ".inputrc" = {
+    #   text = ''
+    #     $include /etc/inputrc
+    #     set bell-style none
+    #     set show-all-if-ambiguous on
+    #     set show-all-if-unmodified on
+    #     set completion-ignore-case on
+    #     set expand-tilde off
+    #     set menu-complete-display-prefix on
+    #     # so bash cycles thru completions
+    #     TAB: menu-complete
+    #   '';
+    # };
+    # ".config/nix/nix.conf" = {
+    #   text = "experimental-features = nix-command flakes";
+    # };
+    # ".config/git/boehringer-ingelheim.inc" = {
+    #   text = ''
+    #     [user]
+    #       name = "Martin Marcher";
+    #       email = "martin.marcher@boehringer-ingelheim.com";
+    #   '';
+    # };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -131,56 +131,56 @@ in {
   programs = {
     home-manager.enable = true;
 
-    tmux = {
-      enable = true;
-      clock24 = true;
-      shortcut = "space";
-      sensibleOnTop = true;
-      plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
-      extraConfig = ''
-        # Easier and faster switching between next/prev window
-        bind C-n next-window
-        bind C-p previous-window
-      '';
-    };
+    # tmux = {
+    #   enable = true;
+    #   clock24 = true;
+    #   shortcut = "space";
+    #   sensibleOnTop = true;
+    #   plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
+    #   extraConfig = ''
+    #     # Easier and faster switching between next/prev window
+    #     bind C-n next-window
+    #     bind C-p previous-window
+    #   '';
+    # };
 
-    direnv = {
-      enable = true;
-      enableBashIntegration = true; # see note on other shells below
-      nix-direnv.enable = true;
-    };
+    # direnv = {
+    #   enable = true;
+    #   enableBashIntegration = true; # see note on other shells below
+    #   nix-direnv.enable = true;
+    # };
 
-    bash = {
-      enable = true;
-      historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
-      historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
-      ## near the start
-      initExtra = ''
-        if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                                  # added by Nix installer
-        if [ -r /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh ]; then . /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh; fi  # added by Nix installer
-        if [ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then echo "sourcing session vars"; . ~/.nix-profile/etc/profile.d/hm-session-vars.sh; fi                                                                    # added by Nix installer
-        # echo "#INIT [ -e zsh ] && exec zsh"
-        # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
-      '';
-
-      ## near the end
-      bashrcExtra = ''
-        # echo "#EXTRA [ -e zsh ] && exec zsh"
-      '';
-    };
+    # bash = {
+    #   enable = true;
+    #   historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
+    #   historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
+    #   ## near the start
+    #   initExtra = ''
+    #     if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                                  # added by Nix installer
+    #     if [ -r /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh ]; then . /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh; fi  # added by Nix installer
+    #     if [ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then echo "sourcing session vars"; . ~/.nix-profile/etc/profile.d/hm-session-vars.sh; fi                                                                    # added by Nix installer
+    #     # echo "#INIT [ -e zsh ] && exec zsh"
+    #     # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
+    #   '';
+    #
+    #   ## near the end
+    #   bashrcExtra = ''
+    #     # echo "#EXTRA [ -e zsh ] && exec zsh"
+    #   '';
+    # };
 
     fzf = {
       enable = true;
       enableBashIntegration = true;
     };
 
-    zsh = {
-      enable = true;
-      dotDir = ".config/zsh";
-
-      oh-my-zsh = { enable = true; };
-
-    };
+    # zsh = {
+    #   enable = true;
+    #   dotDir = ".config/zsh";
+    #
+    #   oh-my-zsh = { enable = true; };
+    #
+    # };
 
     go = {
       enable = true;
@@ -201,51 +201,51 @@ in {
 
     gh = { enable = true; };
 
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      # plugins = with pkgs; [
-      #   vimPlugins.vim-tmux-navigator
-      # ];
-    };
+    # neovim = {
+    #   enable = true;
+    #   viAlias = true;
+    #   vimAlias = true;
+    #   vimdiffAlias = true;
+    #   # plugins = with pkgs; [
+    #   #   vimPlugins.vim-tmux-navigator
+    #   # ];
+    # };
 
-    git = {
-      enable = true;
-      package = pkgs.gitFull;
-      userName = "serverhorror";
-      userEmail = "serverhorror@users.noreply.github.com";
-      extraConfig = {
-        # # This is an example of how to configure git to use a credential helper.
-        # # This is useful for example when you want to use a password manager to
-        # # store your git credentials.
-        core = { whitespace = "trailing-space,space-before-tab"; };
-        rerere = { enabled = true; };
-        "credential \"https://bitbucket.biscrum.com\"" = {
-          bitbucketAuthModes = "oauth";
-          provider = "bitbucket";
-          helper = [
-            "cache --timeout 21600"
-            "oauth"
-          ];
-          useHttpPath = "true";
-        };
-        "credential \"https://huggingface.co\"" = { provider = "generic"; };
-        "credential \"https://dev.azure.com\"" = { useHttpPath = "true"; };
-        credential = {
-          credentialStore = "cache";
-          helper = [
-            "cache --timeout 21600"
-            "/home/${inputs.systemUserName}/.nix-profile/bin/git-credential-manager"
-          ];
-          useHttpPath = "true";
-        };
-      };
-      includes = [{
-        path = ".config/git/boehringer-ingelheim.inc";
-        condition = "hasconfig:remote.*.url:https://bitbucket.biscrum.com/**";
-      }];
-    };
+    # git = {
+    #   enable = true;
+    #   package = pkgs.gitFull;
+    #   userName = "serverhorror";
+    #   userEmail = "serverhorror@users.noreply.github.com";
+    #   extraConfig = {
+    #     # # This is an example of how to configure git to use a credential helper.
+    #     # # This is useful for example when you want to use a password manager to
+    #     # # store your git credentials.
+    #     core = { whitespace = "trailing-space,space-before-tab"; };
+    #     rerere = { enabled = true; };
+    #     "credential \"https://bitbucket.biscrum.com\"" = {
+    #       bitbucketAuthModes = "oauth";
+    #       provider = "bitbucket";
+    #       helper = [
+    #         "cache --timeout 21600"
+    #         "oauth"
+    #       ];
+    #       useHttpPath = "true";
+    #     };
+    #     "credential \"https://huggingface.co\"" = { provider = "generic"; };
+    #     "credential \"https://dev.azure.com\"" = { useHttpPath = "true"; };
+    #     credential = {
+    #       credentialStore = "cache";
+    #       helper = [
+    #         "cache --timeout 21600"
+    #         "/home/${inputs.systemUserName}/.nix-profile/bin/git-credential-manager"
+    #       ];
+    #       useHttpPath = "true";
+    #     };
+    #   };
+    #   includes = [{
+    #     path = ".config/git/boehringer-ingelheim.inc";
+    #     condition = "hasconfig:remote.*.url:https://bitbucket.biscrum.com/**";
+    #   }];
+    # };
   };
 }

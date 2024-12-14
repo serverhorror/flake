@@ -27,8 +27,10 @@
         # # home-manager
         # home-manager
         # # common
-        # neovim # handled by home-manager
-        # gitFull # handled by home-manager
+        bash
+        neovim
+        direnv
+        gitFull
         coreutils
         gnumake
         stow
@@ -40,7 +42,8 @@
         git-credential-manager
         git-credential-oauth
         libsecret
-        # tmux # handled by home-manager
+        tmux
+        zellij
         curl
         httpie
         dig
