@@ -28,32 +28,33 @@
         # home-manager
         # # common
         bash
-        neovim
-        direnv
-        gitFull
         coreutils
-        gnumake
-        stow
-        xclip  # so we have a working vim clipboard
+        curl
+        dig
+        direnv
+        fd
         gcc
-        rsync
-        openrsync
-        tree
         git-credential-manager
         git-credential-oauth
-        libsecret
-        tmux
-        zellij
-        curl
+        gitFull
+        gnumake
         httpie
-        dig
-        fd
         jq
-        yq
-        ripgrep
-        pup
-        unzip
+        lazygit
+        libsecret
         libxml2
+        neovim
+        openrsync
+        pup
+        ripgrep
+        rsync
+        stow
+        tmux
+        tree
+        unzip
+        xclip  # so we have a working vim clipboard
+        yq
+        zellij
         # IaC, containers, K8S
         docker-client
         docker-buildx
