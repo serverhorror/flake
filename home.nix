@@ -49,57 +49,6 @@ in {
   #   '';
   # };
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  # home.file = {
-  #   ".config/nvim" = {
-  #     source = builtins.fetchGit {
-  #       url = "https://github.com/serverhorror/dotfiles-vim.git";
-  #       ref = "main";
-  #       rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
-  #       # sha256 = "...";
-  #     };
-  #   };
-  #   ".digrc" = {
-  #     text = ''
-  #       +noall
-  #       +answer
-  #     '';
-  #   };
-  #   ".inputrc" = {
-  #     text = ''
-  #       $include /etc/inputrc
-  #       set bell-style none
-  #       set show-all-if-ambiguous on
-  #       set show-all-if-unmodified on
-  #       set completion-ignore-case on
-  #       set expand-tilde off
-  #       set menu-complete-display-prefix on
-  #       # so bash cycles thru completions
-  #       TAB: menu-complete
-  #     '';
-  #   };
-  #   ".config/nix/nix.conf" = {
-  #     text = "experimental-features = nix-command flakes";
-  #   };
-  #   ".config/git/boehringer-ingelheim.inc" = {
-  #     text = ''
-  #       [user]
-  #         name = "Martin Marcher";
-  #         email = "martin.marcher@boehringer-ingelheim.com";
-  #     '';
-  #   };
-  #   # Building this configuration will create a copy of 'dotfiles/screenrc' in
-  #   # the Nix store. Activating the configuration will then make '~/.screenrc' a
-  #   # symlink to the Nix store copy.
-  #   ".screenrc".source = dotfiles/screenrc;
-
-  #   # # You can also set the file content immediately.
-  #   # ".gradle/gradle.properties".text = ''
-  #   #   org.gradle.console=verbose
-  #   #   org.gradle.daemon.idletimeout=3600000
-  #   # '';
-  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -130,26 +79,6 @@ in {
   # Let Home Manager install and manage itself.
   programs = {
     home-manager.enable = true;
-
-    # tmux = {
-    #   enable = true;
-    #   clock24 = true;
-    #   shortcut = "space";
-    #   sensibleOnTop = true;
-    #   plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
-    #   extraConfig = ''
-    #     # Easier and faster switching between next/prev window
-    #     bind C-n next-window
-    #     bind C-p previous-window
-    #   '';
-    # };
-
-    # direnv = {
-    #   enable = true;
-    #   enableBashIntegration = true; # see note on other shells below
-    #   nix-direnv.enable = true;
-    # };
-
     # bash = {
     #   enable = true;
     #   historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
@@ -167,87 +96,6 @@ in {
     #   bashrcExtra = ''
     #     # echo "#EXTRA [ -e zsh ] && exec zsh"
     #   '';
-    # };
-
-    # lazygit = { enable = true; };
-
-    # fzf = {
-    #   enable = true;
-    #   enableBashIntegration = true;
-    # };
-
-    # zsh = {
-    #   enable = true;
-    #   dotDir = ".config/zsh";
-    #
-    #   oh-my-zsh = { enable = true; };
-    #
-    # };
-
-    #go = {
-    #  enable = true;
-    #  goBin = "bin";
-    #  goPrivate = [ "*.biscrum.com" ];
-    #};
-
-    #awscli = {
-    #  enable = true;
-    #  # # overwrites ~/.aws/config
-    #  # settings = {
-    #  #   "default" = {
-    #  #     region = "eu-west-1";
-    #  #     output = "json";
-    #  #   };
-    #  # };
-    #};
-
-    # gh = { enable = true; };
-
-    # neovim = {
-    #   enable = true;
-    #   viAlias = true;
-    #   vimAlias = true;
-    #   vimdiffAlias = true;
-    #   # plugins = with pkgs; [
-    #   #   vimPlugins.vim-tmux-navigator
-    #   # ];
-    # };
-
-    # git = {
-    #   enable = true;
-    #   package = pkgs.gitFull;
-    #   userName = "serverhorror";
-    #   userEmail = "serverhorror@users.noreply.github.com";
-    #   extraConfig = {
-    #     # # This is an example of how to configure git to use a credential helper.
-    #     # # This is useful for example when you want to use a password manager to
-    #     # # store your git credentials.
-    #     core = { whitespace = "trailing-space,space-before-tab"; };
-    #     rerere = { enabled = true; };
-    #     "credential \"https://bitbucket.biscrum.com\"" = {
-    #       bitbucketAuthModes = "oauth";
-    #       provider = "bitbucket";
-    #       helper = [
-    #         "cache --timeout 21600"
-    #         "oauth"
-    #       ];
-    #       useHttpPath = "true";
-    #     };
-    #     "credential \"https://huggingface.co\"" = { provider = "generic"; };
-    #     "credential \"https://dev.azure.com\"" = { useHttpPath = "true"; };
-    #     credential = {
-    #       credentialStore = "cache";
-    #       helper = [
-    #         "cache --timeout 21600"
-    #         "/home/${inputs.systemUserName}/.nix-profile/bin/git-credential-manager"
-    #       ];
-    #       useHttpPath = "true";
-    #     };
-    #   };
-    #   includes = [{
-    #     path = ".config/git/boehringer-ingelheim.inc";
-    #     condition = "hasconfig:remote.*.url:https://bitbucket.biscrum.com/**";
-    #   }];
     # };
   };
 }
