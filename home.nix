@@ -51,55 +51,55 @@ in {
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = {
-    # ".config/nvim" = {
-    #   source = builtins.fetchGit {
-    #     url = "https://github.com/serverhorror/dotfiles-vim.git";
-    #     ref = "main";
-    #     rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
-    #     # sha256 = "...";
-    #   };
-    # };
-    ".digrc" = {
-      text = ''
-        +noall
-        +answer
-      '';
-    };
-    # ".inputrc" = {
-    #   text = ''
-    #     $include /etc/inputrc
-    #     set bell-style none
-    #     set show-all-if-ambiguous on
-    #     set show-all-if-unmodified on
-    #     set completion-ignore-case on
-    #     set expand-tilde off
-    #     set menu-complete-display-prefix on
-    #     # so bash cycles thru completions
-    #     TAB: menu-complete
-    #   '';
-    # };
-    # ".config/nix/nix.conf" = {
-    #   text = "experimental-features = nix-command flakes";
-    # };
-    # ".config/git/boehringer-ingelheim.inc" = {
-    #   text = ''
-    #     [user]
-    #       name = "Martin Marcher";
-    #       email = "martin.marcher@boehringer-ingelheim.com";
-    #   '';
-    # };
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+  # home.file = {
+  #   ".config/nvim" = {
+  #     source = builtins.fetchGit {
+  #       url = "https://github.com/serverhorror/dotfiles-vim.git";
+  #       ref = "main";
+  #       rev = "d1b4d20718e61ed2a4368fa2b286fc8f0c358a32";
+  #       # sha256 = "...";
+  #     };
+  #   };
+  #   ".digrc" = {
+  #     text = ''
+  #       +noall
+  #       +answer
+  #     '';
+  #   };
+  #   ".inputrc" = {
+  #     text = ''
+  #       $include /etc/inputrc
+  #       set bell-style none
+  #       set show-all-if-ambiguous on
+  #       set show-all-if-unmodified on
+  #       set completion-ignore-case on
+  #       set expand-tilde off
+  #       set menu-complete-display-prefix on
+  #       # so bash cycles thru completions
+  #       TAB: menu-complete
+  #     '';
+  #   };
+  #   ".config/nix/nix.conf" = {
+  #     text = "experimental-features = nix-command flakes";
+  #   };
+  #   ".config/git/boehringer-ingelheim.inc" = {
+  #     text = ''
+  #       [user]
+  #         name = "Martin Marcher";
+  #         email = "martin.marcher@boehringer-ingelheim.com";
+  #     '';
+  #   };
+  #   # Building this configuration will create a copy of 'dotfiles/screenrc' in
+  #   # the Nix store. Activating the configuration will then make '~/.screenrc' a
+  #   # symlink to the Nix store copy.
+  #   ".screenrc".source = dotfiles/screenrc;
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
+  #   # # You can also set the file content immediately.
+  #   # ".gradle/gradle.properties".text = ''
+  #   #   org.gradle.console=verbose
+  #   #   org.gradle.daemon.idletimeout=3600000
+  #   # '';
+  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -169,12 +169,12 @@ in {
     #   '';
     # };
 
-    lazygit = { enable = true; };
+    # lazygit = { enable = true; };
 
-    fzf = {
-      enable = true;
-      enableBashIntegration = true;
-    };
+    # fzf = {
+    #   enable = true;
+    #   enableBashIntegration = true;
+    # };
 
     # zsh = {
     #   enable = true;
@@ -184,24 +184,24 @@ in {
     #
     # };
 
-    go = {
-      enable = true;
-      goBin = "bin";
-      goPrivate = [ "*.biscrum.com" ];
-    };
+    #go = {
+    #  enable = true;
+    #  goBin = "bin";
+    #  goPrivate = [ "*.biscrum.com" ];
+    #};
 
-    awscli = {
-      enable = true;
-      # # overwrites ~/.aws/config
-      # settings = {
-      #   "default" = {
-      #     region = "eu-west-1";
-      #     output = "json";
-      #   };
-      # };
-    };
+    #awscli = {
+    #  enable = true;
+    #  # # overwrites ~/.aws/config
+    #  # settings = {
+    #  #   "default" = {
+    #  #     region = "eu-west-1";
+    #  #     output = "json";
+    #  #   };
+    #  # };
+    #};
 
-    gh = { enable = true; };
+    # gh = { enable = true; };
 
     # neovim = {
     #   enable = true;

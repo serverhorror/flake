@@ -27,6 +27,7 @@
         # # home-manager
         # home-manager
         # # common
+        awscli
         bash
         coreutils
         curl
@@ -34,6 +35,7 @@
         direnv
         fd
         gcc
+        gh
         git-credential-manager
         git-credential-oauth
         gitFull
@@ -47,6 +49,7 @@
         openrsync
         pup
         ripgrep
+        fzf
         rsync
         stow
         tmux
@@ -75,7 +78,7 @@
         # nodejs_20
         nodejs_22
         # Go
-        # go gopls # handled by home-manager
+        go gopls
         # Zig
         zig
         zls
