@@ -58,6 +58,7 @@
         xclip  # so we have a working vim clipboard
         yq
         zellij
+        zk
         # IaC, containers, K8S
         docker-client
         docker-buildx
