@@ -74,28 +74,29 @@ in {
     EDITOR = "command -v code >/dev/null 2>&1 && code --wait - || vim";
     VISUAL = "command -v code >/dev/null 2>&1 && code --wait - || vim";
     PATH = "$HOME/bin:$PATH";
+    LC_ALL = "C.utf8";
   };
 
   # Let Home Manager install and manage itself.
   programs = {
     home-manager.enable = true;
-    # bash = {
-    #   enable = true;
-    #   historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
-    #   historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
-    #   ## near the start
-    #   initExtra = ''
-    #     if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                                  # added by Nix installer
-    #     if [ -r /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh ]; then . /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh; fi  # added by Nix installer
-    #     if [ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then echo "sourcing session vars"; . ~/.nix-profile/etc/profile.d/hm-session-vars.sh; fi                                                                    # added by Nix installer
-    #     # echo "#INIT [ -e zsh ] && exec zsh"
-    #     # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
-    #   '';
-    #
-    #   ## near the end
-    #   bashrcExtra = ''
-    #     # echo "#EXTRA [ -e zsh ] && exec zsh"
-    #   '';
-    # };
+    bash = {
+      enable = true;
+      historyControl = [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ];
+      historyIgnore = [ "cd .." "cd" "exit" "ll" "ls -l" "ls" "history" ];
+      ## near the start
+      initExtra = ''
+        if [ -e /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${inputs.systemUserName}/.nix-profile/etc/profile.d/nix.sh; fi                                  # added by Nix installer
+        if [ -r /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh ]; then . /etc/profiles/per-user/${inputs.systemUserName}/etc/profile.d/hm-session-vars.sh; fi  # added by Nix installer
+        if [ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then echo "sourcing session vars"; . ~/.nix-profile/etc/profile.d/hm-session-vars.sh; fi                                                                    # added by Nix installer
+        # echo "#INIT [ -e zsh ] && exec zsh"
+        # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
+      '';
+    
+      ## near the end
+      bashrcExtra = ''
+        # echo "#EXTRA [ -e zsh ] && exec zsh"
+      '';
+    };
   };
 }
