@@ -83,6 +83,7 @@
         # Zig
         zig
         zls
+	texliveFull
         # nix stuff
         nixfmt-rfc-style
       ];
