@@ -92,10 +92,11 @@ in {
         # echo "#INIT [ -e zsh ] && exec zsh"
         # echo '#INIT [ -d ~/bin ] && export PATH="~/bin:$PATH"'
       '';
-    
+
       ## near the end
       bashrcExtra = ''
         # echo "#EXTRA [ -e zsh ] && exec zsh"
+        if [ -r "$HOME/.bashrc.local" ]; then source "$HOME/.bashrc.local"; fi
       '';
     };
   };
