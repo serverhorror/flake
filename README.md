@@ -1,5 +1,9 @@
 # nix
 
+<div style="border: 5px solid red;">
+ARCHIVED
+</div>
+
 * <https://nixos.org/manual/nixpkgs/unstable/>
 
 ## Configuration
