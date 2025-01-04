@@ -1,8 +1,7 @@
 # nix
 
-<div style="border: 5px solid red;">
-ARCHIVED
-</div>
+> [!CAUTION]
+> 2025-01-04 ARCHIVED
 
 * <https://nixos.org/manual/nixpkgs/unstable/>
 
