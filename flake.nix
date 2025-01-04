@@ -59,6 +59,7 @@
         yq
         zellij
         zk
+        oh-my-posh
         # IaC, containers, K8S
         docker-client
         docker-buildx
